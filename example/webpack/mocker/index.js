@@ -1,5 +1,6 @@
 const { login } = require('./user');
 const delay = require('mocker-api/utils/delay');
+const data = require('./data');
 
 // 是否禁用代理
 const noProxy = process.env.NO_PROXY === 'true';
@@ -11,6 +12,22 @@ const proxy = {
       '/repos/*': 'https://api.github.com/',
     },
     changeHost: true,
+  },
+  'GET /op-riihi/traffic-violations': (req, res) => {
+      console.log('-1--->', req.params)
+      return res.json(data.trafficViolations);
+  },
+  'GET /op-riihi/traffic-accidents': (req, res) => {
+      console.log('-1--->', req.params)
+      return res.json(data.trafficAccidents);
+  },
+  'GET /op-riihi/traffic-violations/:id': (req, res) => {
+      console.log('-1--->', req.params)
+      return res.json(data.trafficViolation);
+  },
+  'GET /op-riihi/traffic-accidents/:id': (req, res) => {
+      console.log('-1--->', req.params)
+      return res.json(data.trafficAccident);
   },
   'GET /api/userinfo/:id': (req, res) => {
     console.log('-1--->', req.params)
